@@ -7,6 +7,12 @@ import { User } from "@prisma/client";
 
 export const authenticator = new Authenticator<User>(sessionStorage);
 
+console.log({
+  clientID: process.env.CLIENT_ID!,
+  clientSecret: process.env.CLIENT_SECRET!,
+  callbackURL: process.env.CALLBACK_URL!,
+});
+
 let microsoftStrategy = new MicrosoftStrategy(
   {
     clientID: process.env.CLIENT_ID!,
