@@ -46,7 +46,7 @@ export const uploadFile: UploadHandler = async ({ data, name }) => {
   const id = uuid();
 
   const service = BlobServiceClient.fromConnectionString(
-    "DefaultEndpointsProtocol=https;AccountName=fwdatastore;AccountKey=eIR4JfWeK7S5PfspRVQSzLNgrWhM/CTjkGjZUeGIU1XAMyL31MrTXMnhI0roQ1cIOyOZ8/0F6Rs5+AStuuzEVw==;EndpointSuffix=core.windows.net"
+    process.env.CONNECTION_STRING!
   );
   const client = service.getContainerClient("bc100").getBlockBlobClient(id);
 
