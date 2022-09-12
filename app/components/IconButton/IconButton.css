@@ -1,0 +1,8 @@
+[data-settings] {
+  background: url("/icons/settings.svg");
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
