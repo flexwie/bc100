@@ -128,16 +128,17 @@ export default function Dashboard() {
           />
         </div>
         <ul role="list" className="grid grid-cols-1 gap-2">
-          {data.journeys.map((j) => (
-            <Card
-              journey={j as any}
-              key={j.id}
-              onClick={() =>
-                selected != j.id && !j.private && setSelected(j.id)
-              }
-              selected={selected == j.id}
-            />
-          ))}
+          {data.journeys &&
+            data.journeys.map((j) => (
+              <Card
+                journey={j as any}
+                key={j.id}
+                onClick={() =>
+                  selected != j.id && !j.private && setSelected(j.id)
+                }
+                selected={selected == j.id}
+              />
+            ))}
         </ul>
       </main>
     </div>
