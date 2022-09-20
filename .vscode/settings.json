@@ -1,6 +1,10 @@
 {
-    "git.enableCommitSigning": true,
-    "editor.formatOnSave": true,
-    "files.autoSave": "onFocusChange",
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "git.enableCommitSigning": true,
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "emmet.useInlineCompletions": false,
+  "emmet.showSuggestionsAsSnippets": false,
+  "emmet.showAbbreviationSuggestions": false,
+  "emmet.showExpandedAbbreviation": "never"
 }

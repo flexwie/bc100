@@ -30,7 +30,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 
   return (
     <button
-      className={`${className} ${theme} py-2 px-4 transition-color ease-in-out duration-300 rounded-ml`}
+      className={`${className} ${theme} transition-color ease-in-out duration-300 rounded-ml`}
       onClick={click}
     >
       {text}

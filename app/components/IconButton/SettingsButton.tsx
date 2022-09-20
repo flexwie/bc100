@@ -16,6 +16,9 @@ export const links: LinksFunction = () => [
 
 export const SettingsButton = () => {
   return (
-    <span data-settings className="h-6 border-1 border-black border"></span>
+    <span
+      data-settings
+      className="h-6 border-2 border-ciblue-500 hover:border-ciblue-700 p-4 rounded"
+    ></span>
   );
 };

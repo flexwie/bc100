@@ -3,12 +3,12 @@ const prisma = new PrismaClient();
 
 async function main() {
   const user = await prisma.user.upsert({
-    where: { externalId: "gkf88vYmfj8QWhU073Zonvrqugrb7d-_XY-btPA3Yso" },
+    where: { external_id: "gkf88vYmfj8QWhU073Zonvrqugrb7d-_XY-btPA3Yso" },
     update: {},
     create: {
       name: "Felix Wieland",
       mail: "WielandF@singhammer.com",
-      externalId: "gkf88vYmfj8QWhU073Zonvrqugrb7d-_XY-btPA3Yso",
+      external_id: "gkf88vYmfj8QWhU073Zonvrqugrb7d-_XY-btPA3Yso",
     },
   });
 
@@ -19,7 +19,7 @@ async function main() {
       end_date: new Date("02.01.2022"),
       cost: 34.44,
       private: false,
-      userId: user.id,
+      user_id: user.id,
     },
   });
 
@@ -30,7 +30,7 @@ async function main() {
       end_date: new Date("02.03.2022"),
       cost: 64.23,
       private: true,
-      userId: user.id,
+      user_id: user.id,
     },
   });
 }

@@ -7,12 +7,6 @@ import { User } from "@prisma/client";
 
 export const authenticator = new Authenticator<User>(sessionStorage);
 
-console.log({
-  clientID: process.env.CLIENT_ID!,
-  clientSecret: process.env.CLIENT_SECRET!,
-  callbackURL: process.env.CALLBACK_URL!,
-});
-
 let microsoftStrategy = new MicrosoftStrategy(
   {
     clientID: process.env.CLIENT_ID!,
@@ -23,7 +17,7 @@ let microsoftStrategy = new MicrosoftStrategy(
   },
   async ({ accessToken, extraParams, profile }) => {
     let user = await prisma.user.findUnique({
-      where: { externalId: profile.id },
+      where: { external_id: profile.id },
     });
     if (user) {
       return user;
@@ -32,7 +26,7 @@ let microsoftStrategy = new MicrosoftStrategy(
     user = await prisma.user.create({
       data: {
         name: profile.displayName,
-        externalId: profile.id,
+        external_id: profile.id,
         mail: profile.emails[0].value,
       },
     });

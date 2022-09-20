@@ -7,9 +7,6 @@
   );
 }
 .link-card {
-  list-style: none;
-  display: flex;
-  padding: 0.15rem;
   background-image: var(--link-gradient);
   background-size: 400%;
   border-radius: 0.5rem;
@@ -17,7 +14,7 @@
   transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.link-card.locked {
+.locked {
   filter: grayscale(1);
 }
 
@@ -50,14 +47,23 @@ h2 span {
   color: #4f39fa;
 }
 
+li > div > h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 [data-locked] {
   background: url("/icons/lock.svg");
   height: 24px;
   width: 24px;
 }
 
-li > div > h2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+[data-hasattachments] {
+  background: url("/icons/clip.svg");
+  height: 24px;
+  width: 24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

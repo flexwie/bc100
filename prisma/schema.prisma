@@ -6,15 +6,20 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
+// datasource db {
+//   provider = "mysql"
+//   url = env("DATABASE_URL")
+//   referentialIntegrity = "prisma"
+// }
+
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Organisation {
   id Int @id @default(autoincrement())
-  externalId String? @unique
+  external_id String? @unique
   users User[]
   is_onboarded Boolean @default(false)
 }
@@ -23,27 +28,35 @@ model User {
   id Int @id @default(autoincrement())
   name String
   mail String
-  externalId String? @unique
+  external_id String? @unique
   journeys Journey[]
-  organisation Organisation? @relation(fields: [organisationId], references: [id])
-  organisationId Int?
+  organisation Organisation? @relation(fields: [organisation_id], references: [id])
+  organisation_id Int?
+  spending_target Decimal @default(0)
 }
 
 model Journey {
   id Int @id @default(autoincrement())
   description String
   start_date DateTime
-  end_date DateTime
+  end_date DateTime?
   cost Decimal
   private Boolean @default(false)
-  user User @relation(fields: [userId], references: [id])
-  userId Int
-  Attachments Attachment[]
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int
+  attachments Attachment[]
 }
 
 model Attachment {
   id Int @id @default(autoincrement())
+  azure_id String
   filename String
-  journey Journey @relation(fields: [journeyId], references: [id])
-  journeyId Int
+  sas_url String?
+  journey Journey @relation(fields: [journey_id], references: [id])
+  journey_id Int
+}
+
+model Test {
+  id Int @id @default(autoincrement())
+  Data String
 }
