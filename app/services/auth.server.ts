@@ -5,7 +5,10 @@ import { prisma } from "./prisma.server";
 import { odata } from "@azure/data-tables";
 import { User } from "@prisma/client";
 
-export const authenticator = new Authenticator<User>(sessionStorage);
+export const authenticator = new Authenticator<User>(sessionStorage, {
+  sessionErrorKey: "x-login-error",
+  throwOnError: true,
+});
 
 let microsoftStrategy = new MicrosoftStrategy(
   {
