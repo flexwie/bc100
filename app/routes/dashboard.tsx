@@ -56,9 +56,11 @@ export default function Dashboard() {
 
   const spentAmount = useMemo(
     () =>
-      data.journeys.reduce((a, o) => {
-        return a + parseInt(o.cost);
-      }, 0),
+      data.journeys
+        ? data.journeys.reduce((a, o) => {
+            return a + parseInt(o.cost);
+          }, 0)
+        : 0,
     [data]
   );
   const spentPerc = useMemo(
