@@ -10,7 +10,7 @@ export const createActionFunction = async (
   args: DataFunctionArgs,
   handler: ActionFunctionCreatorArgs
 ): Promise<ActionFunction> => {
-  if (!(await authenticator.isAuthenticated(args.request))) redirect("/");
+  if (!(await authenticator.isAuthenticated(args.request))) redirect("/owhat");
 
   switch (args.request.method) {
     case "POST":

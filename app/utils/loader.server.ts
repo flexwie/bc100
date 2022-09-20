@@ -9,7 +9,7 @@ type LoaderFunctionCreatorArgs = {
 export const createLoaderFunction = async (
   args: LoaderFunctionCreatorArgs
 ): Promise<LoaderFunction> => {
-  if (!(await authenticator.isAuthenticated(args.request))) redirect("/");
+  if (!(await authenticator.isAuthenticated(args.request))) redirect("/why");
 
   return args.onLoad;
 };
