@@ -4,6 +4,6 @@ import { authenticator } from "~/services/auth.server";
 export const loader: LoaderFunction = ({ request }) => {
   return authenticator.authenticate("microsoft", request, {
     successRedirect: "/dashboard",
-    failureRedirect: "/ohno",
+    failureRedirect: "/error",
   });
 };
