@@ -19,21 +19,31 @@ let microsoftStrategy = new MicrosoftStrategy(
     prompt: "login", // optional
   },
   async ({ accessToken, extraParams, profile }) => {
-    let user = await prisma.user.findUnique({
-      where: { external_id: profile.id },
-    });
-    if (user) {
-      return user;
-    }
+    // let user = await prisma.user.findUnique({
+    //   where: { external_id: profile.id },
+    // });
+    // if (user) {
+    //   return user;
+    // }
 
-    user = await prisma.user.create({
-      data: {
+    // user = await prisma.user.create({
+    //   data: {
+    //     name: profile.displayName,
+    //     external_id: profile.id,
+    //     mail: profile.emails[0].value,
+    //   },
+    // });
+    // return user;
+
+    return await prisma.user.upsert({
+      create: {
         name: profile.displayName,
         external_id: profile.id,
         mail: profile.emails[0].value,
       },
+      update: { name: profile.displayName, mail: profile.emails[0].value },
+      where: { external_id: profile.id },
     });
-    return user;
   }
 );
 
