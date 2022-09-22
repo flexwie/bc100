@@ -64,6 +64,9 @@ export default function Settings() {
           </div>
         </div>
       </div>
+      <Form method="post" action="/auth/logout">
+        <button>Logout</button>
+      </Form>
     </main>
   );
 }

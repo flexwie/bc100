@@ -33,7 +33,7 @@ import cStyle from "react-circular-progressbar/dist/styles.css";
 
 type LoaderData = {
   user: User;
-  journeys: Journey[];
+  journeys?: Journey[];
 };
 
 export const links: LinksFunction = () => [
@@ -112,8 +112,8 @@ export default function Dashboard() {
             target!
           </div>
         </div>
-        <div className="flex justify-between">
-          <h2 className="font-semibold text-lg mb-2 uppercase">This Month</h2>
+        <div className="flex justify-between items-center my-4">
+          <h2 className="font-semibold text-lg uppercase">This Month</h2>
           <Button
             text="+ Add New"
             variant="solid"
@@ -121,7 +121,7 @@ export default function Dashboard() {
             className="transition duration-150 h-fit px-4 py-2"
           />
         </div>
-        <div className={`${!showForm && "hidden"}`}>
+        <div className={`${!showForm && "hidden"} mb-4`}>
           <p className="text-red">{action ? action.error : ""}</p>
           <CreateForm
             open={showForm}

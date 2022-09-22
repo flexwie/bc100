@@ -33,9 +33,11 @@ export default function Index() {
           </p>
         </div>
       ) : (
-        <form action="/auth/login" method="post">
-          <button>Login</button>
-        </form>
+        <div className="instructions">
+          <form action="/auth/login" method="post">
+            <button>Login</button>
+          </form>
+        </div>
       )}
     </main>
   );
