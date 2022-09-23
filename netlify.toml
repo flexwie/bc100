@@ -1,10 +1,10 @@
 [build]
-  command = "build"
+  command = "npm run build"
   publish = "public"
 
 [dev]
   command = "remix watch"
-  port = 3000
+  port = 3001
 
 [[redirects]]
   from = "/*"
