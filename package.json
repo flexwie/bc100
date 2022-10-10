@@ -10,7 +10,7 @@
     "dev:css": "npm run generate:css -- --watch",
     "dev:remix": "remix dev",
     "generate:css": "npx tailwindcss -o ./app/tailwind.css",
-    "prestart": "prisma db push",
+    "prestart": "sleep 10 && prisma db push",
     "start": "remix-serve build"
   },
   "dependencies": {
