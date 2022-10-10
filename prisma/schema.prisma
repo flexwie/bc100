@@ -7,14 +7,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./data.db"
 }
-
-// datasource db {
-//   provider = "sqlite"
-//   url      = "file:./dev.db"
-// }
 
 model Organisation {
   id Int @id @default(autoincrement())
