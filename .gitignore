@@ -5,3 +5,5 @@ node_modules
 /.netlify
 .env
 build
+
+prisma/*.db
