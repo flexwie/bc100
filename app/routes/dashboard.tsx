@@ -121,8 +121,8 @@ export default function Dashboard() {
             className="transition duration-150 h-fit px-4 py-2"
           />
         </div>
+        <p className="text-red">{action ? action.error : ""}</p>
         <div className={`${!showForm && "hidden"} mb-4`}>
-          <p className="text-red">{action ? action.error : ""}</p>
           <CreateForm
             open={showForm}
             formRef={formRef}
