@@ -22,14 +22,26 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata (tags, labels) for app
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ghcr.io/flexwie/bc100
-      - name: Build and push
+      - name: Extract metadata (tags, labels) for init
+        id: meta_init
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ghcr.io/flexwie/bc100-init
+      - name: Build and push app image
         uses: docker/build-push-action@v3
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push init image
+        uses: docker/build-push-action@v3
+        with:
+          file: init.Dockerfile
+          push: true
+          tags: ${{ steps.meta_init.outputs.tags }}
+          labels: ${{ steps.meta_init.outputs.labels }}
