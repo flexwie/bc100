@@ -9,6 +9,6 @@ COPY ./ .
 RUN npm run build
 ENV NODE_ENV=production
 
-RUN apk add sqlite3
+RUN apk add sqlite
 
 CMD ["npm", "run", "start"]
