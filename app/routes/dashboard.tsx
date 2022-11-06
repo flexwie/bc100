@@ -179,6 +179,7 @@ export const action: ActionFunction = async (args) => {
         const body = await unstable_parseMultipartFormData(request, uploadFile);
         await addJourney(body, user!.id);
       } catch (e) {
+        throw e;
         return json({ error: (e as Error).message });
       }
       return json({ error: null });
@@ -192,6 +193,7 @@ export const action: ActionFunction = async (args) => {
         await deleteJourney(parseInt(id!), user!.id);
         return json({ error: null });
       } catch (e) {
+        throw e;
         return json({
           error: (e as Error).message + "\n" + (e as Error).stack,
         });
