@@ -120,13 +120,6 @@ export default function Dashboard() {
             click={() => setShowForm(true)}
             className="transition duration-150 h-fit px-4 py-2"
           />
-          <Button
-            text="Error"
-            click={() => {
-              throw new Error("upsi");
-            }}
-            variant="solid"
-          />
         </div>
         <p className="text-red">{action ? action.error : ""}</p>
         <div className={`${!showForm && "hidden"} mb-4`}>
@@ -199,7 +192,9 @@ export const action: ActionFunction = async (args) => {
         await deleteJourney(parseInt(id!), user!.id);
         return json({ error: null });
       } catch (e) {
-        return json({ error: (e as Error).message });
+        return json({
+          error: (e as Error).message + "\n" + (e as Error).stack,
+        });
       }
     },
   });
