@@ -14,6 +14,8 @@ import {
 import styles from "./tailwind.css";
 import rootStyles from "./root.css";
 
+import { withSentry } from "@sentry/remix";
+
 export const links: LinksFunction = () => [
   {
     rel: "stylesheet",
@@ -49,7 +51,7 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
-export default function App() {
+function App() {
   return (
     <html lang="en">
       <head>
@@ -65,3 +67,5 @@ export default function App() {
     </html>
   );
 }
+
+export default withSentry(App);

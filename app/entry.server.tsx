@@ -1,7 +1,14 @@
 import type { EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { renderToString } from "react-dom/server";
-import { ServerStyleSheet } from 'styled-components'
+import * as Sentry from "@sentry/remix";
+import { prisma } from "./services/prisma.server";
+
+Sentry.init({
+  dsn: process.env["SENTRY_DSN"],
+  tracesSampleRate: 1,
+  integrations: [new Sentry.Integrations.Prisma({ client: prisma })],
+});
 
 export default function handleRequest(
   request: Request,
@@ -9,7 +16,6 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
-
   const markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );
