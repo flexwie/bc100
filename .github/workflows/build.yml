@@ -22,16 +22,22 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels) for app
+      - name: Docker meta
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ghcr.io/flexwie/bc100
-      - name: Extract metadata (tags, labels) for init
+          tag-custom: latest
+          tag-semver: |
+            {{raw}}
+      - name: Docker meta init
         id: meta_init
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: ghcr.io/flexwie/bc100-init
+          tag-custom: latest
+          tag-semver: |
+            {{raw}}
       - name: Build and push app image
         uses: docker/build-push-action@v3
         with:
