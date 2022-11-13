@@ -25,7 +25,8 @@ prisma.$use(async (params, next) => {
   if (
     params.model == "Journey" &&
     params.action == "findMany" &&
-    params.args.include.attachments == true
+    params.args.include &&
+    params.args.include?.attachments == true
   ) {
     for (const r of result) {
       for (const a of r.attachments) {
@@ -40,4 +41,14 @@ prisma.$use(async (params, next) => {
   return result;
 });
 
-export { prisma };
+function exclude<User, Key extends keyof User>(
+  user: User,
+  ...keys: Key[]
+): Omit<User, Key> {
+  for (let key of keys) {
+    delete user[key];
+  }
+  return user;
+}
+
+export { prisma, exclude };

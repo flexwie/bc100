@@ -8,3 +8,4 @@ build
 
 prisma/*.db
 db
+.kpt-pipeline

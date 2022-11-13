@@ -28,8 +28,6 @@ export const addJourney = async (
   const parsedData = Object.fromEntries(data);
   const validatedData = createSchema.validate(parsedData, { convert: true });
 
-  console.log(validatedData);
-
   if (validatedData.error) throw new Error(validatedData.error.message);
 
   const { description, start_date, end_date, cost, attachment } =
@@ -37,16 +35,6 @@ export const addJourney = async (
 
   const roundedCost =
     Math.round((parseFloat(cost) + Number.EPSILON) * 100) / 100;
-
-  console.log({
-    data: {
-      description,
-      start_date,
-      end_date,
-      cost: roundedCost,
-      user_id: userId,
-    },
-  });
 
   const j = await prisma.journey.create({
     data: {

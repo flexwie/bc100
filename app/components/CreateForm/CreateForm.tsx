@@ -4,22 +4,14 @@ import { Button } from "../Button/Button";
 import DatePicker from "react-datepicker";
 import InputMask from "react-input-mask";
 
-interface CreateFormProps {
-  open: boolean;
-  formRef: React.RefObject<HTMLFormElement>;
-  onSubmit: () => void;
-}
+interface CreateFormProps {}
 
 interface DatePickerProps {
   onChange: (date: Date) => void;
   selected: Date;
 }
 
-export const CreateForm: FunctionComponent<CreateFormProps> = ({
-  open,
-  formRef,
-  onSubmit,
-}) => {
+export const CreateForm: FunctionComponent<CreateFormProps> = ({}) => {
   const transition = useTransition();
 
   const [showEnd, setShowEnd] = useState(false);
@@ -29,18 +21,14 @@ export const CreateForm: FunctionComponent<CreateFormProps> = ({
 
   return (
     <Form
-      className={`mt-4 transition ease-in duration-100 delay-50 ${
-        open ? "visible opacity-100" : "invisible opacity-0"
-      }`}
+      className={`mt-4`}
       method="post"
-      action="/dashboard"
+      action="/journey/new"
       encType="multipart/form-data"
-      ref={formRef}
       onReset={() => {
         setShowEnd(false);
         setStart(new Date());
       }}
-      onSubmit={onSubmit}
     >
       <fieldset
         className="grid grid-cols-2 gap-4"

@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  previewFeatures = ["referentialIntegrity", "tracing", "interactiveTransactions"]
 }
 
 datasource db {
@@ -14,19 +14,37 @@ datasource db {
 model Organisation {
   id Int @id @default(autoincrement())
   external_id String? @unique
+  name String @unique
+  admin_id Int 
   users User[]
-  is_onboarded Boolean @default(false)
+  invites Invite[]
 }
 
 model User {
   id Int @id @default(autoincrement())
   name String
   mail String
+  picture UserPicture?
   external_id String? @unique
   journeys Journey[]
   organisation Organisation? @relation(fields: [organisation_id], references: [id])
   organisation_id Int?
   spending_target Decimal @default(0)
+  is_onboarded Boolean @default(false)
+}
+
+model Invite {
+  id Int @id @default(autoincrement())
+  user_mail String
+  organisation Organisation @relation(fields: [organisation_id], references: [id])
+  organisation_id Int
+}
+
+model UserPicture {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [user_id], references: [id])
+  user_id Int @unique
+  data String
 }
 
 model Journey {

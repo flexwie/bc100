@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "@remix-run/node";
+import { DataFunctionArgs, LoaderFunction, redirect } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
 
 type LoaderFunctionCreatorArgs = {
@@ -7,9 +7,10 @@ type LoaderFunctionCreatorArgs = {
 };
 
 export const createLoaderFunction = async (
-  args: LoaderFunctionCreatorArgs
-): Promise<LoaderFunction> => {
-  if (!(await authenticator.isAuthenticated(args.request))) redirect("/why");
+  args: DataFunctionArgs,
+  fn: any
+): Promise<() => Promise<LoaderFunction>> => {
+  const user = await authenticator.isAuthenticated(args.request);
 
-  return args.onLoad;
+  return fn(args);
 };

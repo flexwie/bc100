@@ -4,7 +4,7 @@ import { getSession } from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await authenticator.isAuthenticated(request, {
-    successRedirect: "/dashbaord",
+    successRedirect: "/dashboard",
   });
 
   let session = await getSession(request.headers.get("cookie"));
@@ -14,5 +14,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const action: ActionFunction = ({ request }) => {
+  const url = new URL(request.url);
+  const invite_id = url.searchParams.get("invite");
+  if (invite_id) {
+    return authenticator.authenticate("microsoft", request, {
+      successRedirect: `/onboarding/invite?id=${invite_id}`,
+    });
+  }
+
   return authenticator.authenticate("microsoft", request);
 };

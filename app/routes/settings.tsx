@@ -24,26 +24,22 @@ export default function Settings() {
   const data = useLoaderData();
 
   return (
-    <main>
-      <h1>
-        <span className="text-gradient">BC100</span> Settings
-      </h1>
+    <>
       <div>
-        <h2>User</h2>
-        <div className="flex">
-          <div>
-            <p>Name</p>
-            <p>{data.name}</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <Form action="/settings" method="post">
+        <h2>Target Budget</h2>
+        <p>Set the target budget you want to spend each month.</p>
+        <Form action="/settings" method="post" className="grid grid-cols-3">
           <input name="target" />
           <button>Submit</button>
         </Form>
+        <p>Un-Onboard:</p>
+        <Form action="/settings" method="post" className="grid grid-cols-3">
+          <input name="is_onboarded" value="false" hidden />
+          <button>Submit</button>
+        </Form>
+        <div>{JSON.stringify(data)}</div>
       </div>
-      <div>
+      <div className="hidden">
         <h2>Plan</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-gray-400 border rounded px-2 py-4 flex justify-center">
@@ -67,12 +63,12 @@ export default function Settings() {
       <Form method="post" action="/auth/logout">
         <button>Logout</button>
       </Form>
-    </main>
+    </>
   );
 }
 
-export const loader: LoaderFunction = ({ request }) => {
-  const user = authenticator.isAuthenticated(request);
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await authenticator.isAuthenticated(request);
   if (!user) return redirect("/");
 
   return user;
@@ -81,12 +77,18 @@ export const loader: LoaderFunction = ({ request }) => {
 export const action: ActionFunction = (args) => {
   return createActionFunction(args, {
     onPost: async ({ request }) => {
-      const data = Object.fromEntries(await request.formData());
+      const form = await request.formData();
+      const data = Object.fromEntries(form);
 
       const user = await authenticator.isAuthenticated(request);
 
       const updatedUser = await prisma.user.update({
-        data: { spending_target: data.target.valueOf() },
+        data: {
+          spending_target: data.target ? data.target.valueOf() : undefined,
+          is_onboarded: data.is_onboarded
+            ? data.is_onboarded.valueOf() == true
+            : undefined,
+        },
         where: { id: user?.id },
       });
 

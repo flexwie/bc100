@@ -25,7 +25,6 @@ import {
 } from "~/services/journey.server";
 import { prisma } from "~/services/prisma.server";
 import { startOfMonth, endOfMonth } from "date-fns";
-import styles from "./dashboard.css";
 import dpStyle from "react-datepicker/dist/react-datepicker.css";
 import { createActionFunction } from "~/utils/action.server";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -39,7 +38,6 @@ type LoaderData = {
 export const links: LinksFunction = () => [
   ...cardLinks(),
   ...sbLinks(),
-  { rel: "stylesheet", href: styles },
   { rel: "stylesheet", href: dpStyle },
   { rel: "stylesheet", href: cStyle },
 ];
