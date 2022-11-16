@@ -3,6 +3,9 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
+  variants: {
+    extend: {},
+  },
   theme: {
     fontFamily: {
       sans: ["system-ui", "sans-serif"],
@@ -19,7 +22,18 @@ module.exports = {
           500: "#4F39FA",
           700: "#1A05BE",
         },
-        ciwhite: "#f5f0f0",
+        ciwhite: {
+          100: "#f8f5f5",
+          300: "#f5f0f0",
+          500: "#ddd8d8",
+          700: "#c4c0c0",
+        },
+        ciblack: {
+          100: "#7b7878",
+          300: "#4a4848",
+          500: "#313030",
+          700: "#181818",
+        },
       },
     },
   },

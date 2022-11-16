@@ -7,8 +7,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { Form, useLoaderData, useTransition } from "@remix-run/react";
-import { FunctionComponent } from "react";
-import { BahnCard, links as bcStyle } from "~/components/BahnCard/BahnCard";
+import { FunctionComponent, useState } from "react";
 import { Button } from "~/components/Button/Button";
 import { authenticator } from "~/services/auth.server";
 import { prisma } from "~/services/prisma.server";
@@ -16,28 +15,43 @@ import { commitSession, getSession } from "~/services/session.server";
 
 type LoaderType = User & { picture: UserPicture };
 
-export const links: LinksFunction = () => [...bcStyle()];
-
 export default function Onboarding() {
   const data = useLoaderData<LoaderType>();
   const transition = useTransition();
 
+  const [invites, setInvites] = useState<string[]>([]);
+
   return (
     <>
-      <div className="prose mb-4">
-        <h2>Hey {data.name}!</h2>
-        <img src={`data:image/png;base64, ${data.picture.data}`} />
-        <p>
-          Nice to have you on board. Please fill out some additional
-          information:
-        </p>
+      <div className="mb-4">
+        <div className="flex items-center mb-4">
+          <img
+            className="w-36 mr-4"
+            src={`data:image/png;base64, ${data.picture.data}`}
+          />
+          <div>
+            <h2>Hey {data.name}!</h2>
+            <p>
+              Nice to have you with us. Before you can start to onboard your
+              colleagues you need to name your organsiation.
+            </p>
+          </div>
+        </div>
         <Form method="post" action="/onboarding?index">
           <fieldset
-            className="grid grid-cols-2 gap-2 mb-2"
+            className="grid mb-2"
             disabled={transition.state == "submitting"}
           >
             <label htmlFor="orga_name">Organisation Name</label>
             <Input name="orga_name" />
+          </fieldset>
+
+          <fieldset
+            className="grid mb-2"
+            disabled={transition.state == "submitting"}
+          >
+            <label htmlFor="invites">Invites</label>
+            <Input name="invites" />
           </fieldset>
 
           <Button text="Let's go" variant="solid" />
@@ -96,6 +110,7 @@ const Input: FunctionComponent<{ name: string }> = ({ name }) => {
   return (
     <input
       name={name}
+      autoComplete="off"
       className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
     />
   );

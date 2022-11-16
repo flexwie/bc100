@@ -49,4 +49,14 @@ let microsoftStrategy = new MicrosoftStrategy(
   }
 );
 
+export const isAdmin = async (user: User | null) => {
+  if (!user) return false;
+
+  const orga = await prisma.organisation.findFirstOrThrow({
+    where: { id: user.organisation_id! },
+  });
+
+  return orga.admin_id == user.id;
+};
+
 authenticator.use(microsoftStrategy);

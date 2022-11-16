@@ -25,12 +25,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   const theme =
     variant == "outlined"
-      ? "bg-ciwhite text-black hover:text-white hover:bg-ciblue-700"
+      ? "bg-ciwhite-300 text-black hover:text-white hover:bg-ciblue-700"
       : "bg-ciblue-500 text-white hover:bg-ciblue-700";
 
   return (
     <button
-      className={`${className} ${theme} transition-color ease-in-out duration-300 rounded-ml`}
+      className={`${className} ${theme} transition-color ease-in-out duration-300 rounded-ml px-3 py-2`}
       onClick={click}
     >
       {text}
