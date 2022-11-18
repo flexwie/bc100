@@ -13,7 +13,7 @@ export const sendInvite = async (
     to: mail,
     from: "mail@felixwie.com", // Change to your verified sender
     subject: "Join BC100",
-    html: `<p>${admin.name} invited you to join ${orga.name} on BC100.</p><a href="http://localhost:3000/invite?invite=${invite_id}">Join</a>`,
+    html: `<p>${admin.name} invited you to join ${orga.name} on BC100.</p><a href="http://localhost:3000/auth/login?invite=${invite_id}">Join</a>`,
   };
 
   await sg.send(msg);

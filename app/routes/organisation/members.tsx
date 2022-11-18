@@ -20,10 +20,7 @@ export default function Members() {
         {data.users.map((u) => (
           <Card>
             <div className="flex items-center">
-              <img
-                className="w-12 mr-4"
-                src={`data:image/png;base64, ${u.picture.data}`}
-              />
+              <img className="w-12 mr-4" src={u.picture.data} />
               <div>
                 <p>{u.name}</p>
                 <p className="text-slate-500 font-sm">{u.mail.toLowerCase()}</p>

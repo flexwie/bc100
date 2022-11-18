@@ -9,7 +9,7 @@ import {
 
 export const loader: LoaderFunction = async ({ request }) => {
   // make sure request is authenticated
-  let user = await authenticator.authenticate("microsoft", request, {
+  let user = await authenticator.authenticate("github", request, {
     failureRedirect: "/",
   });
 

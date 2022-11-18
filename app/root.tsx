@@ -79,38 +79,39 @@ function App() {
               <span className="text-gradient">BC100</span> Portal
             </h1>
           </div>
-          {pathname != "/onboarding" && pathname != "/onboarding/invite" && (
-            <div className="grid grid-cols-5 mb-6">
-              <a href="/dashboard">
-                <div className={createBorder(pathname, "/dashboard")}>
-                  Overview
-                </div>
-              </a>
-              <a href="/journey">
-                <div className={createBorder(pathname, "/journey")}>
-                  Journeys
-                </div>
-              </a>
-
-              {isOrgaAdmin && (
-                <a href="/organisation">
-                  <div className={createBorder(pathname, "/organisation")}>
-                    Organisation
+          {!pathname.startsWith("/auth") &&
+            !pathname.startsWith("/onboarding") && (
+              <div className="grid grid-cols-5 mb-6">
+                <a href="/dashboard">
+                  <div className={createBorder(pathname, "/dashboard")}>
+                    Overview
                   </div>
                 </a>
-              )}
-              <div
-                className={`${
-                  isOrgaAdmin ? "col-span-1" : "col-span-2"
-                } border-b-4 border-ciblue-500`}
-              />
-              <a href="/settings">
-                <div className={createBorder(pathname, "/settings")}>
-                  Settings
-                </div>
-              </a>
-            </div>
-          )}
+                <a href="/journey">
+                  <div className={createBorder(pathname, "/journey")}>
+                    Journeys
+                  </div>
+                </a>
+
+                {isOrgaAdmin && (
+                  <a href="/organisation">
+                    <div className={createBorder(pathname, "/organisation")}>
+                      Organisation
+                    </div>
+                  </a>
+                )}
+                <div
+                  className={`${
+                    isOrgaAdmin ? "col-span-1" : "col-span-2"
+                  } border-b-4 border-ciblue-500`}
+                />
+                <a href="/settings">
+                  <div className={createBorder(pathname, "/settings")}>
+                    Settings
+                  </div>
+                </a>
+              </div>
+            )}
           <Outlet />
         </main>
         <ScrollRestoration />

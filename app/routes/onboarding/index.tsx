@@ -23,10 +23,7 @@ export default function Onboarding() {
     <>
       <div className="mb-4">
         <div className="flex sm:flex-row flex-col items-center mb-4">
-          <img
-            className="w-36 mb-4 sm:mb-0 sm:mr-4 "
-            src={`data:image/png;base64, ${data.picture.data}`}
-          />
+          <img className="w-36 mb-4 sm:mb-0 sm:mr-4 " src={data.picture.data} />
           <div className="flex flex-col">
             <h2 className="text-center sm:text-left">Hey {data.name}!</h2>
             <p>
@@ -109,7 +106,7 @@ const Input: FunctionComponent<{ name: string }> = ({ name }) => {
     <input
       name={name}
       autoComplete="off"
-      className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
+      className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500 dark:text-black dark:caret-black"
     />
   );
 };

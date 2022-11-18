@@ -27,7 +27,7 @@ export default function Onboarding() {
       <div className="prose mb-4">
         <p className="text-red-600">INVITE</p>
         <h2>Hey {data.name}!</h2>
-        <img src={`data:image/png;base64, ${data.picture.data}`} />
+        <img src={data.picture.data} />
         <p>
           Nice to have you on board. Please fill out some additional
           information:

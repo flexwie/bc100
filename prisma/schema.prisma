@@ -11,6 +11,11 @@ datasource db {
   url      = "file:../db/data.db"
 }
 
+// enum Provider {
+//   github
+//   microsoft
+// }
+
 model Organisation {
   id Int @id @default(autoincrement())
   external_id String? @unique
@@ -31,6 +36,7 @@ model User {
   organisation_id Int?
   spending_target Decimal @default(0)
   is_onboarded Boolean @default(false)
+  origin String @default("")
 }
 
 model Invite {
@@ -66,9 +72,4 @@ model Attachment {
   sas_url String?
   journey Journey @relation(fields: [journey_id], references: [id])
   journey_id Int
-}
-
-model Test {
-  id Int @id @default(autoincrement())
-  Data String
 }

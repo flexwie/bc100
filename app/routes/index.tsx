@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
-import { Button, links as buttonLinks } from "../components/Button/Button";
+import { links as buttonLinks } from "../components/Button/Button";
 import { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { Form, Outlet, useLoaderData } from "@remix-run/react";
+import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 import styles from "./index.css";
 
@@ -22,9 +22,9 @@ export default function Index() {
     <>
       <div>
         <p>Login Page</p>
-        <Form method="post" action="/auth/login">
+        <Link to="/auth/login">
           <button>Login</button>
-        </Form>
+        </Link>
       </div>
       <Outlet />
     </>
