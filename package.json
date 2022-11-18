@@ -53,6 +53,7 @@
     "react-hotkeys-hook": "^3.4.7",
     "react-input-mask": "^3.0.0-alpha.2",
     "remix-auth": "^3.2.2",
+    "remix-auth-github": "^1.1.1",
     "remix-auth-microsoft": "^1.0.3",
     "stripe": "^10.8.0",
     "styled-components": "^5.3.5",

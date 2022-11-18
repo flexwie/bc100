@@ -1,15 +1,17 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { authenticator } from "~/services/auth.server";
-import { getSession } from "~/services/session.server";
+import {
+  commitSession,
+  getSession,
+  settingsStorage,
+} from "~/services/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  await authenticator.isAuthenticated(request, {
+  await authenticator.authenticate("microsoft", request, {
     successRedirect: "/dashboard",
   });
 
-  let session = await getSession(request.headers.get("cookie"));
-  let error = session.get(authenticator.sessionErrorKey);
-  return json({ error });
+  return null;
 };
 
 export const action: ActionFunction = ({ request }) => {
@@ -17,7 +19,7 @@ export const action: ActionFunction = ({ request }) => {
   const invite_id = url.searchParams.get("invite");
   if (invite_id) {
     return authenticator.authenticate("microsoft", request, {
-      successRedirect: `/onboarding/invite?id=${invite_id}`,
+      successRedirect: `/onboarding/invite`,
     });
   }
 

@@ -19,18 +19,16 @@ export default function Onboarding() {
   const data = useLoaderData<LoaderType>();
   const transition = useTransition();
 
-  const [invites, setInvites] = useState<string[]>([]);
-
   return (
     <>
       <div className="mb-4">
-        <div className="flex items-center mb-4">
+        <div className="flex sm:flex-row flex-col items-center mb-4">
           <img
-            className="w-36 mr-4"
+            className="w-36 mb-4 sm:mb-0 sm:mr-4 "
             src={`data:image/png;base64, ${data.picture.data}`}
           />
-          <div>
-            <h2>Hey {data.name}!</h2>
+          <div className="flex flex-col">
+            <h2 className="text-center sm:text-left">Hey {data.name}!</h2>
             <p>
               Nice to have you with us. Before you can start to onboard your
               colleagues you need to name your organsiation.

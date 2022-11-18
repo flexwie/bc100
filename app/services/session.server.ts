@@ -11,4 +11,15 @@ export const sessionStorage = createCookieSessionStorage({
   },
 });
 
+export const settingsStorage = createCookieSessionStorage({
+  cookie: {
+    name: "settings",
+    sameSite: "lax",
+    path: "/",
+    httpOnly: true,
+    secrets: ["thtsrhs"],
+    secure: process.env.NODE_ENV === "production",
+  },
+});
+
 export const { getSession, commitSession, destroySession } = sessionStorage;

@@ -69,7 +69,6 @@ export default function Members() {
                 </div>
               </Card>
             ))}
-            <p>ho</p>
           </ul>
           {data.orga._count.users > 10 && (
             <Form action="/organisation/members" method="get">
@@ -92,7 +91,7 @@ export default function Members() {
             } transition duration-1000`}
           >
             <Form action="/organisation?index" method="post">
-              <input name="mail" />
+              <input name="mail" className="text-ciblack-500" />
               <Button text="Invite" variant="solid" />
             </Form>
           </div>
@@ -118,10 +117,22 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export const action: ActionFunction = async ({ request }) => {
+  const user = await authenticator.isAuthenticated(request);
+  if (!(await isAdmin(user))) return redirect("/");
+
   const body = await request.formData();
   const mail = body.get("mail")?.valueOf();
 
-  await sendInvite(mail!.toString());
+  const orga = await prisma.organisation.findUniqueOrThrow({
+    where: { id: user!.organisation_id! },
+  });
+  const invite = await prisma.invite.upsert({
+    where: { user_mail: mail!.toString() },
+    create: { organisation_id: orga.id, user_mail: mail!.toString() },
+    update: {},
+  });
+
+  await sendInvite(mail!.toString(), orga, user!, invite.id);
 
   return null;
 };

@@ -1,6 +1,6 @@
 const { setupTracing } = require("./tracing");
 
-setupTracing("bc100");
+//setupTracing("bc100");
 
 const path = require("path");
 const express = require("express");

@@ -35,7 +35,7 @@ model User {
 
 model Invite {
   id Int @id @default(autoincrement())
-  user_mail String
+  user_mail String @unique
   organisation Organisation @relation(fields: [organisation_id], references: [id])
   organisation_id Int
 }

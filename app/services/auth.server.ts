@@ -18,7 +18,7 @@ let microsoftStrategy = new MicrosoftStrategy(
     scope: "openid profile email User.Read", // optional
     prompt: "login", // optional
   },
-  async ({ accessToken, extraParams, profile }) => {
+  async ({ accessToken, profile }) => {
     const res = await fetch(
       "https://graph.microsoft.com/v1.0/me/photos/240x240/$value",
       {

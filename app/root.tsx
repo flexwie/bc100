@@ -74,12 +74,12 @@ function App() {
       </head>
       <body className="bg-ciwhite-300 dark:bg-ciblack-500 dark:text-ciwhite-300">
         <main>
-          <div className="flex justify-between items-center">
+          <div className="flex sm:justify-between justify-center items-center">
             <h1>
               <span className="text-gradient">BC100</span> Portal
             </h1>
           </div>
-          {pathname != "/onboarding" && (
+          {pathname != "/onboarding" && pathname != "/onboarding/invite" && (
             <div className="grid grid-cols-5 mb-6">
               <a href="/dashboard">
                 <div className={createBorder(pathname, "/dashboard")}>
@@ -124,12 +124,13 @@ function App() {
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await authenticator.isAuthenticated(request);
 
-  console.log(user);
-
   if (
     user &&
     user.is_onboarded == false &&
-    !request.url.endsWith("onboarding")
+    !(
+      request.url.endsWith("onboarding") ||
+      request.url.endsWith("onboarding/invite")
+    )
   ) {
     return redirect("/onboarding");
   }

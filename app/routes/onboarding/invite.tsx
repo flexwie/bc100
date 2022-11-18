@@ -25,6 +25,7 @@ export default function Onboarding() {
   return (
     <>
       <div className="prose mb-4">
+        <p className="text-red-600">INVITE</p>
         <h2>Hey {data.name}!</h2>
         <img src={`data:image/png;base64, ${data.picture.data}`} />
         <p>
@@ -32,13 +33,6 @@ export default function Onboarding() {
           information:
         </p>
         <Form method="post" action="/onboarding?index">
-          <fieldset
-            className="grid grid-cols-2 gap-2 mb-2"
-            disabled={transition.state == "submitting"}
-          >
-            <label htmlFor="orga_name">Organisation Name</label>
-            <Input name="orga_name" />
-          </fieldset>
           <fieldset
             className="grid grid-cols-2 gap-2 mb-2"
             disabled={transition.state == "submitting"}
