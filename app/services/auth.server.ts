@@ -29,6 +29,7 @@ let githubStrategy = new GitHubStrategy(
         name: profile.displayName,
         external_id: profile.id,
         mail: profile.emails![0].value,
+        origin: "github",
         picture: {
           create: {
             data: content.avatar_url,
@@ -68,6 +69,7 @@ let microsoftStrategy = new MicrosoftStrategy(
         name: profile.displayName,
         external_id: profile.id,
         mail: profile.emails[0].value,
+        origin: "aad",
         picture: {
           create: {
             data: `data:image/png;base64, ${base64pic}`,

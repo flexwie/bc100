@@ -20,7 +20,7 @@ import rootStyles from "./root.css";
 
 import { authenticator } from "./services/auth.server";
 import { Organisation, User } from "@prisma/client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export const links: LinksFunction = () => [
   {
@@ -61,6 +61,8 @@ function App() {
   const { pathname } = useLocation();
   const data = useLoaderData<User & { organisation?: Organisation }>();
 
+  const [menu, setMenu] = useState(true);
+
   const isOrgaAdmin = useMemo(
     () => data?.organisation?.admin_id == data?.id,
     [data]
@@ -74,27 +76,38 @@ function App() {
       </head>
       <body className="bg-ciwhite-300 dark:bg-ciblack-500 dark:text-ciwhite-300">
         <main>
-          <div className="flex sm:justify-between justify-center items-center">
-            <h1>
+          <div className="sm:flex sm:justify-between grid grid-cols-6 items-center mb-4">
+            <div
+              className="sm:hidden visible align-middle "
+              onClick={() => setMenu(!menu)}
+            >
+              <p className="font-extrabold cursor-pointer p-4 rounded dark:hover:bg-ciblack-100 w-fit h-fit">
+                x
+              </p>
+            </div>
+            <h1 className="col-span-4">
               <span className="text-gradient">BC100</span> Portal
             </h1>
+            <div />
           </div>
           {!pathname.startsWith("/auth") &&
-            !pathname.startsWith("/onboarding") && (
-              <div className="grid grid-cols-5 mb-6">
-                <a href="/dashboard">
+            !(pathname == "/") &&
+            !pathname.startsWith("/onboarding") &&
+            menu && (
+              <div className="sm:grid grid-cols-5 mb-6 flex flex-col">
+                <a href="/dashboard" className="dark:hover:bg-ciblack-100">
                   <div className={createBorder(pathname, "/dashboard")}>
                     Overview
                   </div>
                 </a>
-                <a href="/journey">
+                <a href="/journey" className="sm:dark:hover:bg-ciblack-100">
                   <div className={createBorder(pathname, "/journey")}>
                     Journeys
                   </div>
                 </a>
 
                 {isOrgaAdmin && (
-                  <a href="/organisation">
+                  <a href="/organisation" className="dark:hover:bg-ciblack-100">
                     <div className={createBorder(pathname, "/organisation")}>
                       Organisation
                     </div>
@@ -103,9 +116,9 @@ function App() {
                 <div
                   className={`${
                     isOrgaAdmin ? "col-span-1" : "col-span-2"
-                  } border-b-4 border-ciblue-500`}
+                  } sm:border-b-4 border-ciblue-500`}
                 />
-                <a href="/settings">
+                <a href="/settings" className="dark:hover:bg-ciblack-100">
                   <div className={createBorder(pathname, "/settings")}>
                     Settings
                   </div>
@@ -140,14 +153,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 const createBorder = (path: string, tab: string): string => {
-  let className = "text-center border-ciblue-500 ";
+  let className = "text-center border-ciblue-500 border-0 p-4 sm:p-0 ";
 
   if (path.startsWith(tab)) {
     className +=
-      "border-l-4 border-r-4 border-t-4 border-b-4 border-b-ciwhite-300 dark:border-b-ciblack-500 rounded-tl-md rounded-tr-md";
+      "sm:border-l-4 sm:border-r-4 sm:border-t-4 sm:border-b-4 sm:border-b-ciwhite-300 sm:dark:border-b-ciblack-500 sm:rounded-tl-md sm:rounded-tr-md";
   } else {
     className +=
-      "border-b-4 border-t-4 border-t-ciwhite-300 dark:border-t-ciblack-500";
+      "sm:border-b-4 sm:border-t-4 border-t-ciwhite-300 dark:border-t-ciblack-500";
   }
 
   return className;

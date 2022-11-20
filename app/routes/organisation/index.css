@@ -1,0 +1,19 @@
+.github {
+  background: url("/img/github.png");
+  height: 36px;
+  width: 36px;
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  filter: grayscale(100%);
+}
+
+.aad {
+  background: url("/img/azure.png");
+  height: 36px;
+  width: 36px;
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  filter: grayscale(100%);
+}

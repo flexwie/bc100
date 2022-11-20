@@ -7,5 +7,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   if (!method) throw new Error("No method specified");
 
-  return await authenticator.authenticate(method, request);
+  return await authenticator.authenticate(method, request, {
+    successRedirect: "/dashboard",
+  });
 };

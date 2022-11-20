@@ -2,6 +2,7 @@ import { Invite, Organisation, User, UserPicture } from "@prisma/client";
 import {
   ActionFunction,
   json,
+  LinksFunction,
   LoaderFunction,
   redirect,
 } from "@remix-run/node";
@@ -12,6 +13,10 @@ import { Card } from "~/components/Simple/Card";
 import { authenticator, isAdmin } from "~/services/auth.server";
 import { prisma } from "~/services/prisma.server";
 import { sendInvite } from "~/services/sendgrid.server";
+
+import style from "./index.css";
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: style }];
 
 type LoaderReturn = {
   orga: Organisation & {
@@ -47,6 +52,11 @@ export default function Members() {
                           {u.mail.toLowerCase()}
                         </p>
                       </div>
+                      <div
+                        className={`${
+                          u.origin == "github" ? "github" : "aad"
+                        } ml-auto mr-4`}
+                      />
                     </div>
                   </Card>
                 )
