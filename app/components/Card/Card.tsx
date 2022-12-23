@@ -2,7 +2,7 @@ import { Attachment, Journey } from "@prisma/client";
 import { LinksFunction } from "@remix-run/node";
 import { FunctionComponent } from "react";
 import styles from "./Card.css";
-import { Pill } from "../Pill/Pill";
+import { Badge } from "../Badge/Badge";
 import { DateTime } from "luxon";
 import { Form, Link } from "@remix-run/react";
 import { Button } from "../Button/Button";
@@ -63,7 +63,7 @@ export const Card: FunctionComponent<CardProps> = ({
           {journey.attachments.length > 0 && <span data-hasattachments />}
         </h2>
         <p>
-          <Pill text="depature" />
+          <Badge text="depature" />
           {DateTime.fromISO(journey.start_date as any)
             .setLocale("de")
             .toLocaleString({
@@ -73,7 +73,7 @@ export const Card: FunctionComponent<CardProps> = ({
             })}
         </p>
         <p className={`${!journey.end_date && "invisible"}`}>
-          <Pill text="return" />
+          <Badge text="return" />
           {DateTime.fromISO(journey.end_date as any)
             .setLocale("de")
             .toLocaleString({

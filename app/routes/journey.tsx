@@ -69,7 +69,7 @@ export default function Journeys() {
             </div>
           </div>
         </div>
-        <div className="md:border md:rounded md:p-4">
+        <div className="md:border md:rounded md:p-4 md:border-ciblack-700 m:bg-ciwhite-100 md:dark:bg-ciblack-700 md:shadow-lg">
           <Outlet />
         </div>
       </div>
