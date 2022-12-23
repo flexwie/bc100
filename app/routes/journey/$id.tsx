@@ -4,6 +4,23 @@ import { useLoaderData, useParams } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 import { prisma } from "~/services/prisma.server";
 
+export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  return <div>Error loading: {error.message}</div>;
+};
+
+export default function JourneyId() {
+  const params = useParams();
+  const data = useLoaderData<Journey>();
+  const id = params.id;
+
+  return (
+    <div>
+      <p>Id: {id}</p>
+      <p>Name: {data.description}</p>
+    </div>
+  );
+}
+
 export const loader: LoaderFunction = async ({ request, params }) => {
   let user = await authenticator.isAuthenticated(request);
   if (!user) return json({ error: "not authenticated" });
@@ -15,15 +32,3 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   return result;
 };
-
-export default function JourneyId() {
-  const params = useParams();
-  const data = useLoaderData<Journey>();
-  const id = params.id;
-  return (
-    <div>
-      <p>Id: {id}</p>
-      <p>Name: {data.description}</p>
-    </div>
-  );
-}

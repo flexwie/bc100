@@ -1,6 +1,6 @@
 import { Journey, Organisation, User, UserPicture } from "@prisma/client";
 import { LoaderFunction, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/Button/Button";
 import { Card } from "~/components/Simple/Card";
 import { authenticator, isAdmin } from "~/services/auth.server";
@@ -18,19 +18,24 @@ export default function Members() {
       <h2 className="mb-8">{data.name} - Members</h2>
       <div className="grid grid-cols-1 rounded overflow-hidden shadow-lg w-full bg-ciwhite-300">
         {data.users.map((u) => (
-          <Card>
-            <div className="flex items-center">
-              <img className="w-12 mr-4" src={u.picture.data} />
-              <div>
-                <p>{u.name}</p>
-                <p className="text-slate-500 font-sm">{u.mail.toLowerCase()}</p>
-                <p>Spent: {spentThisMonth(u.journeys as any[])}€</p>
-                <p>
-                  Last Journey: {latestJourney(u.journeys as any[]).toString()}
-                </p>
+          <Link to={`/organisation/${u.id}`}>
+            <Card>
+              <div className="flex items-center">
+                <img className="w-12 mr-4" src={u.picture.data} />
+                <div>
+                  <p>{u.name}</p>
+                  <p className="text-slate-500 font-sm">
+                    {u.mail.toLowerCase()}
+                  </p>
+                  <p>Spent: {spentThisMonth(u.journeys as any[])}€</p>
+                  <p>
+                    Last Journey:{" "}
+                    {latestJourney(u.journeys as any[]).toString()}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>

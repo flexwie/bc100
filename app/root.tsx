@@ -78,11 +78,11 @@ function App() {
         <main>
           <div className="sm:flex sm:justify-between grid grid-cols-6 items-center mb-4">
             <div
-              className="sm:hidden visible align-middle "
+              className="sm:hidden visible align-middle"
               onClick={() => setMenu(!menu)}
             >
               <p className="font-extrabold cursor-pointer p-4 rounded dark:hover:bg-ciblack-100 w-fit h-fit">
-                x
+                {menu ? "x" : "="}
               </p>
             </div>
             <h1 className="col-span-4">

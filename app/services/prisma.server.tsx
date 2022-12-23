@@ -25,8 +25,7 @@ prisma.$use(async (params, next) => {
   if (
     params.model == "Journey" &&
     params.action == "findMany" &&
-    params.args.include &&
-    params.args.include?.attachments == true
+    params?.args?.include?.attachments == true
   ) {
     for (const r of result) {
       for (const a of r.attachments) {

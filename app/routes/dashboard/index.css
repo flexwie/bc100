@@ -1,8 +1,4 @@
 .instructions {
-  line-height: 1.6;
-  margin: 1rem 0;
   background: #4f39fa;
-  padding: 1rem;
-  border-radius: 0.4rem;
   color: var(--color-bg);
 }

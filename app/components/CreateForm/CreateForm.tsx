@@ -31,7 +31,7 @@ export const CreateForm: FunctionComponent<CreateFormProps> = ({}) => {
       }}
     >
       <fieldset
-        className="grid grid-cols-2 gap-4"
+        className="grid grid-cols-1 gap-4"
         disabled={transition.state === "submitting"}
       >
         <label className="grid grid-cols-2">
@@ -43,7 +43,7 @@ export const CreateForm: FunctionComponent<CreateFormProps> = ({}) => {
           <InputMask
             mask="999.99 €"
             alwaysShowMask
-            className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
+            className="dark:text-black dark:caret-black px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
             onChange={(e) => {
               const {
                 target: { value },
@@ -88,7 +88,7 @@ export const CreateForm: FunctionComponent<CreateFormProps> = ({}) => {
         </label>
         <Button
           text={transition.state === "submitting" ? "Creating..." : "Create"}
-          className="w-1/2"
+          className="absolute bottom-4 mb-4"
           variant="solid"
         />
       </fieldset>
@@ -100,7 +100,7 @@ const Input: FunctionComponent<{ name: string }> = ({ name }) => {
   return (
     <input
       name={name}
-      className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
+      className="dark:text-black dark:caret-black px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500"
     />
   );
 };
@@ -111,7 +111,7 @@ const Picker: FunctionComponent<DatePickerProps> = ({ onChange, selected }) => {
       selected={selected}
       onChange={onChange}
       customInput={
-        <input className="px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500 w-full" />
+        <input className="dark:text-black dark:caret-black px-2 border-2 rounded border-ciblue-500 active:border-ciblue-500 w-full" />
       }
     />
   );

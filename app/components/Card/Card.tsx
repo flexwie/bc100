@@ -50,7 +50,7 @@ export const Card: FunctionComponent<CardProps> = ({
       }}
     >
       <div
-        className={`w-full px-5 py-4 leading-snug rounded-md opacity-80 bg-white grid grid-cols-2 gap-2`}
+        className={`w-full px-5 py-4 leading-snug rounded-md opacity-80 bg-white dark:bg-ciwhite-500 grid grid-cols-2 gap-2`}
       >
         <h2 className={`col-span-2`}>
           <div>

@@ -1,6 +1,7 @@
 import {
   ActionFunction,
   json,
+  LinksFunction,
   redirect,
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
@@ -12,6 +13,15 @@ import {
   deleteJourney,
 } from "~/services/journey.server";
 import { createActionFunction } from "~/utils/action.server";
+
+import dpStyle from "react-datepicker/dist/react-datepicker.css";
+
+export const links: LinksFunction = () => [
+  {
+    rel: "stylesheet",
+    href: dpStyle,
+  },
+];
 
 export default function New() {
   return (

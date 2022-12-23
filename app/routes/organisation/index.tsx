@@ -6,7 +6,7 @@ import {
   LoaderFunction,
   redirect,
 } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { Button } from "~/components/Button/Button";
 import { Card } from "~/components/Simple/Card";
@@ -43,22 +43,24 @@ export default function Members() {
             {data.orga.users.map(
               (u, i) =>
                 i < 10 && (
-                  <Card>
-                    <div className="flex items-center">
-                      <img className="w-12 mr-4" src={u.picture.data} />
-                      <div>
-                        <p>{u.name}</p>
-                        <p className="text-slate-500 font-sm">
-                          {u.mail.toLowerCase()}
-                        </p>
+                  <Link to={`/organisation/${u.id}`}>
+                    <Card>
+                      <div className="flex items-center">
+                        <img className="w-12 mr-4" src={u.picture.data} />
+                        <div>
+                          <p>{u.name}</p>
+                          <p className="text-slate-500 font-sm">
+                            {u.mail.toLowerCase()}
+                          </p>
+                        </div>
+                        <div
+                          className={`${
+                            u.origin == "github" ? "github" : "aad"
+                          } ml-auto mr-4`}
+                        />
                       </div>
-                      <div
-                        className={`${
-                          u.origin == "github" ? "github" : "aad"
-                        } ml-auto mr-4`}
-                      />
-                    </div>
-                  </Card>
+                    </Card>
+                  </Link>
                 )
             )}
             {data.invites.map((i) => (
